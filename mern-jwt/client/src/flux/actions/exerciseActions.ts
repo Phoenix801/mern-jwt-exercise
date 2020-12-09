@@ -19,12 +19,12 @@ export const getItems = () => (dispatch: Function) => {
     );
 };
 
-export const addItem = (item: IExercise) => (
+export const addItem = (exercise: IExercise) => (
   dispatch: Function,
   getState: Function
 ) => {
   axios
-    .post('/api/exercises', item, tokenConfig(getState))
+    .post('/api/exercises', exercise, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: ADD_ITEM,

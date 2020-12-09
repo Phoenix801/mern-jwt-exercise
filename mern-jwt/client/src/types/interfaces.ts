@@ -18,7 +18,7 @@ export interface IUser {
   name?: string;
   email: string;
   password: string;
-  phone?: string;
+  phone?: number;
 }
 
 export interface IAuthForm {
@@ -49,6 +49,14 @@ export interface IAuthReduxProps {
   error: IError;
 }
 
+export interface IExerciseProps {
+  auth: {
+    user: IUser;
+    isAuthenticated: boolean;
+  };
+  error: IError;
+}
+
 export interface IConfigHeaders {
   headers: {
     [index: string]: string;
@@ -72,11 +80,11 @@ export interface IExistingItem {
 
 export interface IExistingExercise {
   _id: string;
-  exercise: string;
+  exerciseName: string;
   sets: string;
   reps: string;
   days: string; 
-  phone: string;
+  phone: number;
 }
 
 export interface IItem {
@@ -86,11 +94,11 @@ export interface IItem {
 
 export interface IExercise {
   _id?: string;
-  exercise: string;
-  sets: string;
-  reps: string;
-  days: string; 
-  phone: string;
+  exerciseName: string;
+  sets: number;
+  reps: number;
+  days: string[]; 
+  phone: number;
 }
 
 export interface IExerciseModal {
@@ -98,7 +106,7 @@ export interface IExerciseModal {
     user: IUser;
     isAuthenticated: boolean;
   };
-  addItem(item: IExercise): void;
+  addItem(exercise: IExercise): void;
 }
 
 export interface IItemModal {
@@ -112,11 +120,10 @@ export interface IItemReduxProps extends IAuthReduxProps {
   };
 }
 
-export interface IExerciseReduxProps extends IExerciseModal {
-  item: {
-    items: IExistingExercise[];
+export interface IExerciseReduxProps extends IExerciseProps {
+  exercise: {
+    exercises: IExistingExercise[];
   };
-
 }
 
 export interface IShoppingList {
@@ -128,6 +135,18 @@ export interface IShoppingList {
   isAuthenticated: boolean;
 }
 
+export interface IExerciseList {
+  exercise: {
+    exercises: IExistingExercise[];
+  };
+  getItems(): void;
+  deleteItem(id: string): void;  
+  auth: {
+    user: IUser;
+    isAuthenticated: boolean;
+  };
+}
+
 // <<<<<<<<<<<>>>>>>>>>>>>
 // <<<<<<<< FLUX >>>>>>>>>
 // <<<<<<<<<<<>>>>>>>>>>>>
@@ -135,7 +154,7 @@ export interface IShoppingList {
 export interface IAuthFunction {
   name?: string;
   email: string;
-  phone: string;
+  phone: number;
   password: string;
   password2: string;
 }

@@ -3,12 +3,7 @@ import auth from '../../middleware/auth';
 // Exercise Model
 import Exercise from '../../models/Exercise';
 
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-
-
 const router = Router();
-const propUser = this.props.auth;
 
 
 /**

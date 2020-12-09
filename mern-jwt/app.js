@@ -8,7 +8,7 @@ import config from './config';
 
 // routes
 import authRoutes from './routes/api/auth';
-import itemRoutes from './routes/api/items';
+import exerciseRoutes from './routes/api/exercises';
 import userRoutes from './routes/api/users';
 
 
@@ -35,7 +35,7 @@ mongoose
   .catch(err => console.log(err));
 
 // Use Routes
-app.use('/api/items', itemRoutes);
+app.use('/api/exercises', exerciseRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 

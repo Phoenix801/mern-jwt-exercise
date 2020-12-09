@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 // Create Schema
 const ExerciseSchema = new Schema({
-  exercise: {
+  exerciseName: {
     type: String,
     required: true
   },

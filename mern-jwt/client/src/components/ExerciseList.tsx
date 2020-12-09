@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { getItems, deleteItem } from '../flux/actions/itemActions';
-import { IItemReduxProps, IShoppingList } from '../types/interfaces';
+import { getItems, deleteItem } from '../flux/actions/exerciseActions';
+import { IExerciseReduxProps, IExerciseList } from '../types/interfaces';
 
-const ShoppingList = ({
+const ExerciseList = ({
   getItems,
-  item,
-  isAuthenticated,
+  exercise,
+  auth,
   deleteItem
-}: IShoppingList) => {
+}: IExerciseList) => {
   useEffect(() => {
     getItems();
   }, [getItems]);
@@ -18,16 +18,16 @@ const ShoppingList = ({
   const handleDelete = (id: string) => {
     deleteItem(id);
   };
-console.log(item);
-  const { items } = item;
+
+  const { exercises } = exercise;
   return (
     <Container>
       <ListGroup>
-        <TransitionGroup className="shopping-list">
-          {/*{items.map(({ _id, name }) => (
+        <TransitionGroup className="exercise-list">
+          {exercises.map(({ _id, exerciseName }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
-                {isAuthenticated ? (
+                {auth.isAuthenticated ? (
                   <Button
                     className="remove-btn"
                     color="danger"
@@ -37,19 +37,20 @@ console.log(item);
                     &times;
                   </Button>
                 ) : null}
-                {name}
+                {exerciseName}
               </ListGroupItem>
             </CSSTransition>
-                ))}*/}
+          ))}
         </TransitionGroup>
       </ListGroup>
     </Container>
   );
 };
 
-const mapStateToProps = (state: IItemReduxProps) => ({
-  item: state.item,
-  isAuthenticated: state.auth.isAuthenticated
+const mapStateToProps = (state: IExerciseReduxProps) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  exercise: state.exercise,
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, { getItems, deleteItem })(ShoppingList);
+export default connect(mapStateToProps, { getItems, deleteItem })(ExerciseList);

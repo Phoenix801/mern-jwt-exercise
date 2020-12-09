@@ -29,7 +29,7 @@ const RegisterModal = ({
   const [modal, setModal] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [phoneNumber, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [msg, setMsg] = useState(null);
@@ -49,6 +49,8 @@ const RegisterModal = ({
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
+
+    const phone: number = Number(phoneNumber);
 
     // Create user object
     const user = {

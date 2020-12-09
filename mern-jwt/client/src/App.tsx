@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import AppNavbar from './components/AppNavbar';
-import ShoppingList from './components/ShoppingList';
-import ItemModal from './components/ItemModal';
+import ExerciseList from './components/ExerciseList';
+import ExerciseModal from './components/ExerciseModal';
 import { Container } from 'reactstrap';
 
 import { Provider } from 'react-redux';
@@ -21,8 +21,8 @@ const App = () => {
       <div className="App">
         <AppNavbar />
         <Container>
-          <ItemModal />
-          <ShoppingList />
+          <ExerciseModal />
+          <ExerciseList />
         </Container>
       </div>
     </Provider>
