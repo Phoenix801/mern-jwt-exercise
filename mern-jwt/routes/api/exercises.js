@@ -30,9 +30,9 @@ router.get('/', async (req, res) => {
  */
 
 router.post('/', auth, async (req, res) => {
-  const { exercise, sets, reps, days, phone } = req.body;
+  const { exerciseName, sets, reps, days, phone } = req.body;
   const newExercise = new Exercise({
-    exercise,
+    exerciseName,
     sets,
     reps,
     days,

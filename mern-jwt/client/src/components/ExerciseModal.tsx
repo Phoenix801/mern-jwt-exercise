@@ -63,9 +63,6 @@ let days: string[] = [];
 
 handleOnSubmitDays(days);
 
-
-console.log('logging days before creating an exercise object: ' + days);
-
     // Create exercise object
     const newExercise = {
       exerciseName,
@@ -74,8 +71,6 @@ console.log('logging days before creating an exercise object: ' + days);
       days,
       phone
     };
-
-    console.log(newExercise);
 
     // Add item via addItem action
     addItem(newExercise);
@@ -89,7 +84,6 @@ console.log('logging days before creating an exercise object: ' + days);
   };
 
   const handleOnSubmitDays = (daysArr: string[]) => {
-    console.log('logging sunday boolean status ' + sunday);
 
     if(sunday)
     {
@@ -120,8 +114,6 @@ console.log('logging days before creating an exercise object: ' + days);
       daysArr.push('saturday');
     }
 
-    console.log('logging days ' + daysArr);
-
     handleToggleDays();
   }
 
@@ -144,11 +136,11 @@ console.log('logging days before creating an exercise object: ' + days);
         <ModalBody>
           <Form onSubmit={handleOnSubmit}>
             <FormGroup>
-              <Label for="exercise">Exercise Name</Label>
+              <Label for="exerciseName">Exercise Name</Label>
               <Input
                 type="text"
-                name="exercise"
-                id="exercise"
+                name="exerciseName"
+                id="exerciseName"
                 placeholder="Exercise"
                 onChange={handleChangeExercise}
               />

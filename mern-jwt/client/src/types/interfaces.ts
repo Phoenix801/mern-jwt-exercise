@@ -83,7 +83,7 @@ export interface IExistingExercise {
   exerciseName: string;
   sets: string;
   reps: string;
-  days: string; 
+  days: string[]; 
   phone: number;
 }
 
