@@ -23,6 +23,9 @@ export const addItem = (exercise: IExercise) => (
   dispatch: Function,
   getState: Function
 ) => {
+  console.log(exercise);
+  console.log('exercise days before post ' + exercise.days);
+
   axios
     .post('/api/exercises', exercise, tokenConfig(getState))
     .then(res =>
@@ -34,6 +37,8 @@ export const addItem = (exercise: IExercise) => (
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
+    console.log(exercise);
+    console.log('exercise days after post ' + exercise.days);
 };
 
 export const deleteItem = (id: string) => (

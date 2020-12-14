@@ -39,6 +39,8 @@ router.post('/', auth, async (req, res) => {
     phone
   });
 
+  console.log(newExercise);
+
   try {
     const exercise = await newExercise.save();
     if (!exercise) throw Error('Something went wrong saving the exercise');

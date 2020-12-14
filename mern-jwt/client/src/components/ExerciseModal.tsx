@@ -76,45 +76,48 @@ handleOnSubmitDays(days);
     addItem(newExercise);
     // Close modal
     handleToggle();
-
-    while (days.length)
-    {
-      days.pop();
-    }
   };
 
   const handleOnSubmitDays = (daysArr: string[]) => {
+    console.log(daysArr);
 
     if(sunday)
     {
       daysArr.push('sunday');
+      handleToggleSunday();
     }
     if(monday)
     {
       daysArr.push('monday');
+      handleToggleMonday();
     }
     if(tuesday)
     {
       daysArr.push('tuesday');
+      handleToggleTuesday();
     }
     if(wednesday)
     {
       daysArr.push('wednesday');
+      handleToggleWednesday();
     }
     if(thursday)
     {
       daysArr.push('thursday');
+      handleToggleThursday();
     }
     if(friday)
     {
       daysArr.push('friday');
+      handleToggleFriday();
     }
     if(saturday)
     {
       daysArr.push('saturday');
+      handleToggleSaturday();
     }
 
-    handleToggleDays();
+
   }
 
   return (
@@ -177,49 +180,49 @@ handleOnSubmitDays(days);
                       style={{ marginBottom: '2rem' }}
                       onClick={handleToggleSunday}
                     >
-                      Sunday
+                      Sun
                     </Button>              
                       <Button
                       color="dark"
                       style={{ marginBottom: '2rem' }}
                       onClick={handleToggleMonday}
                     >
-                      Monday
+                      Mon
                     </Button>              
                       <Button
                       color="dark"
                       style={{ marginBottom: '2rem' }}
                       onClick={handleToggleTuesday}
                     >
-                      Tuesday
+                      Tues
                     </Button>              
                       <Button
                       color="dark"
                       style={{ marginBottom: '2rem' }}
                       onClick={handleToggleWednesday}
                     >
-                      Wedday
+                      Wed
                     </Button>              
                       <Button
                       color="dark"
                       style={{ marginBottom: '2rem' }}
                       onClick={handleToggleThursday}
                     >
-                      Thursday
+                      Thur
                     </Button>              
                       <Button
                       color="dark"
                       style={{ marginBottom: '2rem' }}
                       onClick={handleToggleFriday}
                     >
-                      Friday
+                      Fri
                     </Button>              
                       <Button
                       color="dark"
                       style={{ marginBottom: '2rem' }}
                       onClick={handleToggleSaturday}
                     >
-                      Saturday
+                      Sat
                     </Button>
                     <Button color="dark" style={{ marginTop: '2rem' }} block 
                       onClick={handleToggleDays}>

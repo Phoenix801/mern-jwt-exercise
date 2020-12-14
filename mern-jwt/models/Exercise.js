@@ -16,7 +16,7 @@ const ExerciseSchema = new Schema({
   },
   days: {
     type: [String],
-    required: false
+    required: true
   },
   phone: {
     type: Number,
