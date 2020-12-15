@@ -59,7 +59,7 @@ const ExerciseModal = ({ auth, addItem  }: IExerciseModal) => {
 const sets: number = Number(numberOfSets);
 const reps: number = Number(numberOfReps);
 const phone = Number(phoneHolder);
-let days: string[] = [];
+let days: number[] = [];
 
 handleOnSubmitDays(days);
 
@@ -78,46 +78,44 @@ handleOnSubmitDays(days);
     handleToggle();
   };
 
-  const handleOnSubmitDays = (daysArr: string[]) => {
+  const handleOnSubmitDays = (daysArr: number[]) => {
     console.log(daysArr);
 
     if(sunday)
     {
-      daysArr.push('sunday');
+      daysArr.push(0);
       handleToggleSunday();
     }
     if(monday)
     {
-      daysArr.push('monday');
+      daysArr.push(1);
       handleToggleMonday();
     }
     if(tuesday)
     {
-      daysArr.push('tuesday');
+      daysArr.push(2);
       handleToggleTuesday();
     }
     if(wednesday)
     {
-      daysArr.push('wednesday');
+      daysArr.push(3);
       handleToggleWednesday();
     }
     if(thursday)
     {
-      daysArr.push('thursday');
+      daysArr.push(4);
       handleToggleThursday();
     }
     if(friday)
     {
-      daysArr.push('friday');
+      daysArr.push(5);
       handleToggleFriday();
     }
     if(saturday)
     {
-      daysArr.push('saturday');
+      daysArr.push(6);
       handleToggleSaturday();
     }
-
-
   }
 
   return (
