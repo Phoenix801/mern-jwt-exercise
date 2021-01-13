@@ -23,6 +23,17 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const exercise = await Exercise.findById(req.params.id);
+    if (!exercises) throw Error('Exercise not found');
+
+    res.status(200).json(exercises);
+  } catch (e) {
+    res.status(400).json({ msg: e.message });
+  }
+});
+
 /**
  * @route   POST api/exercises
  * @desc    Create An Exercise
@@ -47,6 +58,21 @@ router.post('/', auth, async (req, res) => {
   } catch (e) {
     res.status(400).json({ msg: e.message });
   }
+});
+
+router.route('/update/:id').post((req, res) => {
+  Exercise.findById(req.params.id)
+    .then(exercise => {
+      exercise.exerciseName = req.body.exerciseName;
+      exercise.sets = req.body.sets;
+      exercise.reps = req.body.reps;
+      exercise.days = req.body.days;
+
+      exercise.save()
+        .then(() => res.json('Exercise updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
 });
 
 /**

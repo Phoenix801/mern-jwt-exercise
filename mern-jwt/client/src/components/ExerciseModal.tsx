@@ -12,8 +12,15 @@ import {
 import { connect } from 'react-redux';
 import { addItem } from '../flux/actions/exerciseActions';
 import { IExerciseReduxProps, IExerciseModal, ITarget } from '../types/interfaces';
+import CSS from 'csstype';
+
 
 const ExerciseModal = ({ auth, addItem  }: IExerciseModal) => {
+
+  const darkGrey = 'rgba(20, 20, 20, 0.85)';
+  const white = 'rgba(255, 255, 255, 0.85)';
+  const green = 'rgba(0, 255, 0, 0.4)';
+
   const [modal, setModal] = useState(false);
   const [exerciseName, setExercise] = useState('');
   const [numberOfSets, setSets] = useState('');
@@ -52,6 +59,12 @@ const ExerciseModal = ({ auth, addItem  }: IExerciseModal) => {
   const handleToggleFriday = () => setFriday(!friday);
   const handleToggleSaturday = () => setSaturday(!saturday);
 
+  const handleButtonColor = (e: any) => 
+  {
+    const buttonColor = e.target.style.backgroundColor;
+    e.target.style.backgroundColor = buttonColor === white ? green : white;//toggle week day button color
+                                                                           //if white turn green, else turn white
+  }
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
@@ -61,7 +74,7 @@ const reps: number = Number(numberOfReps);
 const phone = Number(phoneHolder);
 let days: number[] = [];
 
-handleOnSubmitDays(days);
+handleOnSubmitDays(days); //fill days array 
 
     // Create exercise object
     const newExercise = {
@@ -118,6 +131,8 @@ handleOnSubmitDays(days);
     }
   }
 
+  
+
   return (
     <div>
       {auth.isAuthenticated ? (
@@ -143,6 +158,7 @@ handleOnSubmitDays(days);
                 name="exerciseName"
                 id="exerciseName"
                 placeholder="Exercise"
+                className="mb-3"
                 onChange={handleChangeExercise}
               />
               <Label for="sets">Number of Sets</Label>
@@ -173,58 +189,65 @@ handleOnSubmitDays(days);
                       <Modal isOpen={daysModal} toggle={handleToggleDays}>
                       <ModalHeader toggle={handleToggleDays}>Add To Workout Plan</ModalHeader>
                       <ModalBody>
-                      <Button
-                      color="dark"
-                      style={{ marginBottom: '2rem' }}
-                      onClick={handleToggleSunday}
+                    <Button
+                      name="sunday"
+                      outline color="secondary"
+                      style={{ backgroundColor: white, marginLeft: '0.75rem', marginBottom: '2rem', color: darkGrey }}
+                      onClick={(e) => { handleButtonColor(e); handleToggleSunday();}}
                     >
                       Sun
                     </Button>              
                       <Button
-                      color="dark"
-                      style={{ marginBottom: '2rem' }}
-                      onClick={handleToggleMonday}
+                      name="monday"
+                      outline color="secondary"
+                      style={{ backgroundColor: white, marginLeft: '0.75rem', marginBottom: '2rem', color: darkGrey }}
+                      onClick={(e) => { handleButtonColor(e); handleToggleMonday();}}
                     >
                       Mon
                     </Button>              
                       <Button
-                      color="dark"
-                      style={{ marginBottom: '2rem' }}
-                      onClick={handleToggleTuesday}
+                      name="tuesday"
+                      outline color="secondary"
+                      style={{ backgroundColor: white, marginLeft: '0.75rem', marginBottom: '2rem', color: darkGrey }}
+                      onClick={(e) => { handleButtonColor(e); handleToggleTuesday();}}
                     >
                       Tues
                     </Button>              
                       <Button
-                      color="dark"
-                      style={{ marginBottom: '2rem' }}
-                      onClick={handleToggleWednesday}
+                      name="wednesday"
+                      outline color="secondary"
+                      style={{ backgroundColor: white, marginLeft: '0.75rem', marginBottom: '2rem', color: darkGrey }}
+                      onClick={(e) => { handleButtonColor(e); handleToggleWednesday();}}
                     >
                       Wed
                     </Button>              
                       <Button
-                      color="dark"
-                      style={{ marginBottom: '2rem' }}
-                      onClick={handleToggleThursday}
+                      name="thursday"
+                      outline color="secondary"
+                      style={{ backgroundColor: white, marginLeft: '0.75rem', marginBottom: '2rem', color: darkGrey }}
+                      onClick={(e) => { handleButtonColor(e); handleToggleThursday();}}
                     >
                       Thur
                     </Button>              
                       <Button
-                      color="dark"
-                      style={{ marginBottom: '2rem' }}
-                      onClick={handleToggleFriday}
+                      name="friday"
+                      outline color="secondary"
+                      style={{ backgroundColor: white, marginLeft: '0.75rem', marginBottom: '2rem', color: darkGrey }}
+                      onClick={(e) => { handleButtonColor(e); handleToggleFriday();}}
                     >
                       Fri
                     </Button>              
                       <Button
-                      color="dark"
-                      style={{ marginBottom: '2rem' }}
-                      onClick={handleToggleSaturday}
+                      name="saturday"
+                      outline color="secondary"
+                      style={{ backgroundColor: white, marginLeft: '0.75rem', marginBottom: '2rem', color: darkGrey }}
+                      onClick={(e) => { handleButtonColor(e); handleToggleSaturday();}}
                     >
                       Sat
                     </Button>
                     <Button color="dark" style={{ marginTop: '2rem' }} block 
                       onClick={handleToggleDays}>
-                      Submit Days
+                      Save Days
                     </Button>
                       </ModalBody>
                       </Modal>

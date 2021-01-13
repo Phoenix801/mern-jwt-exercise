@@ -36,6 +36,23 @@ export const addItem = (exercise: IExercise) => (
     );
 };
 
+export const editItem = (id: string, exercise: IExercise) => (
+  dispatch: Function,
+  getState: Function
+) => {
+  axios
+    .post(`/api/update/exercises/${id}`, exercise, tokenConfig(getState))
+    .then(res =>
+      dispatch({
+        type: ADD_ITEM,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
 export const deleteItem = (id: string) => (
   dispatch: Function,
   getState: Function

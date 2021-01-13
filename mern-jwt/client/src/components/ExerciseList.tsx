@@ -15,6 +15,9 @@ const ExerciseList = ({
     getItems();
   }, [getItems]);
 
+  const darkGrey = 'rgba(20, 20, 20, 0.85)';
+  const white = 'rgba(240, 240, 240, 0.85)';
+
   const handleDelete = (id: string) => {
     deleteItem(id);
   };
@@ -34,7 +37,14 @@ const ExerciseList = ({
         console.log(err)
       }
   }
+function getExerciseDays(daysArr: number[]) {
+    var daysArrObj = ['Sunday', ' Monday', ' Tuesday', ' Wednesday', ' Thursday', ' Friday', ' Saturday']
+    let dayStrArr: String[] = [];
 
+    daysArr.forEach((day) => dayStrArr.push(daysArrObj[(day)]))
+
+    return dayStrArr;
+}
   const { exercises } = exercise;
 
   const todaysPersonalExercises: IExistingExercise[] = exercises.filter(todaysUserExercises);
@@ -43,7 +53,7 @@ const ExerciseList = ({
     <Container>
       <ListGroup>
         <TransitionGroup className="exercise-list">
-          {todaysPersonalExercises.map(({ _id, exerciseName, sets, reps }) => (
+          {todaysPersonalExercises.map(({ _id, exerciseName, sets, reps, days }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
                 {auth.isAuthenticated ? (
@@ -55,8 +65,12 @@ const ExerciseList = ({
                   >
                     &times;
                   </Button>
-                ) : null}
-                {exerciseName + ' - Sets: ' + sets + ', Reps: ' + reps}
+                 ) : null}
+                <Button
+                      outline color="secondary"
+                      style={{ backgroundColor: white, color: darkGrey }}> 
+                      {exerciseName + ' - Sets: ' + sets + ', Reps: ' + reps + ' - Days: ' + getExerciseDays(days).toString()}
+                </Button>
               </ListGroupItem>
             </CSSTransition>
           ))}
