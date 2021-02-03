@@ -109,6 +109,14 @@ export interface IExerciseModal {
   addItem(exercise: IExercise): void;
 }
 
+export interface IExerciseEdit {
+  auth: {
+    user: IUser;
+    isAuthenticated: boolean;
+  };
+  editItem(id: string, exercise: IExercise): void;
+}
+
 export interface IItemModal {
   isAuthenticated: boolean;
   addItem(item: IItem): void;
@@ -140,7 +148,8 @@ export interface IExerciseList {
     exercises: IExistingExercise[];
   };
   getItems(): void;
-  deleteItem(id: string): void;  
+  editItem(id: string, exercise: IExercise): void;
+  deleteItem(id: string): void;
   auth: {
     user: IUser;
     isAuthenticated: boolean;

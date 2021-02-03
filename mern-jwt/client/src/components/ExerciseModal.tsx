@@ -12,8 +12,6 @@ import {
 import { connect } from 'react-redux';
 import { addItem } from '../flux/actions/exerciseActions';
 import { IExerciseReduxProps, IExerciseModal, ITarget } from '../types/interfaces';
-import CSS from 'csstype';
-
 
 const ExerciseModal = ({ auth, addItem  }: IExerciseModal) => {
 
@@ -91,7 +89,7 @@ handleOnSubmitDays(days); //fill days array
     handleToggle();
   };
 
-  const handleOnSubmitDays = (daysArr: number[]) => {
+const handleOnSubmitDays = (daysArr: number[]) => {
     console.log(daysArr);
 
     if(sunday)

@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
     const exercise = await Exercise.findById(req.params.id);
     if (!exercises) throw Error('Exercise not found');
 
-    res.status(200).json(exercises);
+    res.status(200).json(exercise);
   } catch (e) {
     res.status(400).json({ msg: e.message });
   }
@@ -60,20 +60,24 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
-router.route('/update/:id').post((req, res) => {
-  Exercise.findById(req.params.id)
-    .then(exercise => {
-      exercise.exerciseName = req.body.exerciseName;
-      exercise.sets = req.body.sets;
-      exercise.reps = req.body.reps;
-      exercise.days = req.body.days;
+router.post('/update/:id', auth, async (req, res) => {
+  const { exerciseName, sets, reps, days } = req.body;
+  try {
+    const exercise = await Exercise.findById(req.params.id);
+    if (!exercise) throw Error('No exercise found');
+      exercise.exerciseName = exerciseName;
+      exercise.sets = sets;
+      exercise.reps = reps;
+      exercise.days = days;
 
-      exercise.save()
-        .then(() => res.json('Exercise updated!'))
-        .catch(err => res.status(400).json('Error: ' + err));
-    })
-    .catch(err => res.status(400).json('Error: ' + err));
-});
+      const editedExercise = await exercise.save();
+      if (!editedExercise) throw Error('Something went wrong editing the exercise');
+
+      res.status(200).json(exercise);
+    } catch (e) {
+      res.status(400).json({ msg: e.message });
+    }
+  });
 
 /**
  * @route   DELETE api/exercises/:id

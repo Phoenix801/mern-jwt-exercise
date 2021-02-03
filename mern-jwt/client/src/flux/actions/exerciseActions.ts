@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from './types';
+import { GET_ITEMS, ADD_ITEM, EDIT_ITEM, DELETE_ITEM, ITEMS_LOADING } from './types';
 import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
 import { IExercise } from '../../types/interfaces';
@@ -8,6 +8,21 @@ export const getItems = () => (dispatch: Function) => {
   dispatch(setItemsLoading());
   axios
     .get('/api/exercises')
+    .then(res =>
+      dispatch({
+        type: GET_ITEMS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
+export const getItem = (id: string) => (dispatch: Function) => {
+  dispatch(setItemsLoading());
+  axios
+    .get(`/api/exercises/${id}`)
     .then(res =>
       dispatch({
         type: GET_ITEMS,
@@ -41,10 +56,10 @@ export const editItem = (id: string, exercise: IExercise) => (
   getState: Function
 ) => {
   axios
-    .post(`/api/update/exercises/${id}`, exercise, tokenConfig(getState))
+    .post(`/api/exercises/update/${id}`, exercise, tokenConfig(getState))
     .then(res =>
       dispatch({
-        type: ADD_ITEM,
+        type: EDIT_ITEM,
         payload: res.data
       })
     )

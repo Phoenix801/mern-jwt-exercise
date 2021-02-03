@@ -1,6 +1,7 @@
 import {
   GET_ITEMS,
   ADD_ITEM,
+  EDIT_ITEM,
   DELETE_ITEM,
   ITEMS_LOADING
 } from '../actions/types';
@@ -23,6 +24,11 @@ export default function(state: IState = initialState, action: IAction) {
         exercises: action.payload,
         loading: false
       };
+      case EDIT_ITEM:
+        return {
+          ...state,
+          exercises: [action.payload, ...state.exercises]
+        };
     case DELETE_ITEM:
       return {
         ...state,
